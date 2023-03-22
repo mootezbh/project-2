@@ -21,7 +21,7 @@ module.exports = {
   },
   getAllCategory: async (req, res) => {
     try {
-      const data = await category.find();
+      const data = await category.find().populate('subcategory');
       res.status(200).json({
         message: "all categories",
         success: true,
@@ -73,10 +73,17 @@ module.exports = {
   delete: async (req, res) => {
     try {
       const data = await category.deleteOne({ _id: req.params.id });
-      res.status(200).json({
-        message: "deleted category successfully",
-        status: true,
-      });
+      if (data.deletedCount > 0) {
+        res.status(200).json({
+          message: "deleted category successfully",
+          status: true,
+        });
+      } else {
+        res.status(400).json({
+          message: "category not found",
+          status: false,
+        });
+      }
     } catch (error) {
       res.status(400).json({
         message: "failed to delete category",

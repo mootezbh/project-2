@@ -15,4 +15,4 @@ var subCategorySchema = new mongoose.Schema({
 });
 
 //Export the model
-module.exports = mongoose.model('subCategory', subCategorySchema);
+module.exports = mongoose.model('subcategory', subCategorySchema);

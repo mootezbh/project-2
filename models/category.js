@@ -13,7 +13,7 @@ var categorySchema = new mongoose.Schema({
     },
     subcategory: [{
         type: mongoose.Types.ObjectId,
-        ref: "subCategory"
+        ref: "subcategory"
     }]
 });
 
