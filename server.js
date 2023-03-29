@@ -20,6 +20,7 @@ app.use("/provider", providerRouter);
 app.use("/customer", customerRouter);
 app.use("/admin", adminRouter);
 app.use("/login", authRouter.login);
+app.use("/verify/:code", authRouter.verify);
 
 app.get("/:img", (req, res) => {
   res.sendFile(__dirname + "/uploads/" + req.params.img);
