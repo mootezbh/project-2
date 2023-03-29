@@ -20,6 +20,7 @@ module.exports = {
             expiresIn: "10m",
           });
           refreshtokens.push(refreshtoken);
+          console.log("after login ", refreshtokens);
           res.status(200).json({
             message: "auth successful",
             success: true,
@@ -43,13 +44,27 @@ module.exports = {
       res.status(500).send("Internal Server error Occured");
     }
   },
+  logout: async (req, res) => {
+    try {
+      refreshtoken = req.body.refresh_token;
+    refreshtokens = refreshtokens.filter(token => token != refreshtoken);
+    console.log("after logout :", refreshtokens);
+    res.send("logged out");
+      
+    } catch (error) {
+      res.send("error logging out");
+      console.log(error);
+    }
+    
+  },
   verify: async (req, res) => {
     try {
       user = await User.findOne({ verf_code: req.params.code });
       user.verified = true;
       user.verf_code = undefined;
       user.save();
-      res.sendFile(join(__dirname, "../views/success.html"));
+      //res.sendFile(join(__dirname, "../views/success.html"));
+      res.redirect(__dirname + "../views/success.html");
     } catch (error) {
       res.sendFile(join(__dirname, "../views/fail.html"));
     }

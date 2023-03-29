@@ -7,18 +7,40 @@
     <title>fail</title>
     <link rel="stylesheet" href="./style.css" />
     <style>
-      .container {
-        background-image: url("./img.jpg");
-        filter: blur(5px);
-        height: 500px;
-        background-position: center;
-        
+      .bg {
+        height: 97vh;
+        width: 98vw;
+        z-index: 1;
+        filter: blur(8px);
+      }
+      .box {
+        color: white;
+        font-weight: bold;
+        border: 3px solid #f3f3f3;
+        text-align: center;
+        width: 80%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        padding: 20px;
+      }
+      img {
+        height: 150px;
+        width: 150px;
+      }
+      p {
+        color: red;
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <div class="box">dsds</div>
+    <img src="img.jpg" alt="" class="bg" />
+    <div class="box">
+      <img src="close.png" alt="" />
+      <h1>Status :</h1>
+      <p>Failed to verify</p>
     </div>
   </body>
 </html>
