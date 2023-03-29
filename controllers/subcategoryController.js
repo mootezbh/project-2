@@ -25,7 +25,7 @@ module.exports = {
   },
   getAllsubcategory: async (req, res) => {
     try {
-      const data = await subcategory.find();
+      const data = await subcategory.find().populate("product");
       res.status(200).json({
         message: "all subcategories",
         success: true,

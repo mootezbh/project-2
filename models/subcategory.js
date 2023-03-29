@@ -11,7 +11,11 @@ var subCategorySchema = new mongoose.Schema({
     category: {
         type: mongoose.Types.ObjectId,
         ref: "category"
-    }
+    },
+    product : [{
+        type: mongoose.Types.ObjectId,
+        ref: "Product"
+    }]
 });
 
 //Export the model
