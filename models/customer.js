@@ -11,7 +11,12 @@ const customerSchema = new mongoose.Schema({
   adresse: {
     type: String,
   },
-  
+  orders: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "order",
+    },
+  ],
 });
-user.discriminator("customer",customerSchema);
+user.discriminator("customer", customerSchema);
 module.exports = mongoose.model("customer");

@@ -22,6 +22,7 @@ app.use("/admin", adminRouter);
 app.use("/login", authRouter.login);
 app.use("/verify/:code", authRouter.verify);
 app.use("/logout", authRouter.logout);
+//TODO: orders
 
 app.get("/:img", (req, res) => {
   res.sendFile(__dirname + "/uploads/" + req.params.img);
