@@ -57,7 +57,7 @@ module.exports = {
       const data = await category.updateOne({ _id: req.params.id }, req.body);
       console.log(data);
       res.status(200).json({
-        message: "updated category succesfully",
+        message: "updated category successfully",
         success: true,
         data: data,
       });

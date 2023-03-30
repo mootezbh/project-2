@@ -16,7 +16,7 @@ module.exports = {
             process.env.SECRET,
             { expiresIn: "50s" }
           );
-          refreshtoken = jwt.sign({ id: user._id }, process.env.SECRET, {
+          let refreshtoken = jwt.sign({ id: user._id }, process.env.SECRET, {
             expiresIn: "10m",
           });
           refreshtokens.push(refreshtoken);
@@ -41,25 +41,23 @@ module.exports = {
       }
     } catch (error) {
       console.log(error);
-      res.status(500).send("Internal Server error Occured");
+      res.status(500).send("Internal Server error Occurred");
     }
   },
   logout: async (req, res) => {
     try {
-      refreshtoken = req.body.refresh_token;
-    refreshtokens = refreshtokens.filter(token => token != refreshtoken);
-    console.log("after logout :", refreshtokens);
-    res.send("logged out");
-      
+      let refreshtoken = req.body.refresh_token;
+      refreshtokens = refreshtokens.filter((token) => token != refreshtoken);
+      console.log("after logout :", refreshtokens);
+      res.send("logged out");
     } catch (error) {
       res.send("error logging out");
       console.log(error);
     }
-    
   },
   verify: async (req, res) => {
     try {
-      user = await User.findOne({ verf_code: req.params.code });
+      const user = await User.findOne({ verf_code: req.params.code });
       user.verified = true;
       user.verf_code = undefined;
       user.save();

@@ -78,7 +78,7 @@ module.exports = {
       const data = await customer.updateOne({ _id: req.params.id }, req.body);
       console.log(data);
       res.status(200).json({
-        message: "updated customer succesfully",
+        message: "updated customer successfully",
         success: true,
         data: data,
       });

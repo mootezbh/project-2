@@ -78,7 +78,7 @@ module.exports = {
       const data = await admin.updateOne({ _id: req.params.id }, req.body);
       console.log(data);
       res.status(200).json({
-        message: "updated admin succesfully",
+        message: "updated admin successfully",
         success: true,
         data: data,
       });

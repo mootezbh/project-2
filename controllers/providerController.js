@@ -78,7 +78,7 @@ module.exports = {
       const data = await provider.updateOne({ _id: req.params.id }, req.body);
       console.log(data);
       res.status(200).json({
-        message: "updated provider succesfully",
+        message: "updated provider successfully",
         success: true,
         data: data,
       });

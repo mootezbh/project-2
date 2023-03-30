@@ -2,7 +2,7 @@ const subcategory = require("../models/subcategory");
 const Category = require("../models/category");
 
 module.exports = {
-  addsubcategory: async (req, res) => {
+  add: async (req, res) => {
     const category = await Category.findById({ _id: req.body.category });
     const newsubcategory = new subcategory(req.body);
     newsubcategory.save(req.body, (err, data) => {
@@ -23,7 +23,7 @@ module.exports = {
       }
     });
   },
-  getAllsubcategory: async (req, res) => {
+  getAll: async (req, res) => {
     try {
       const data = await subcategory.find().populate("product");
       res.status(200).json({
@@ -64,7 +64,7 @@ module.exports = {
       );
       console.log(data);
       res.status(200).json({
-        message: "updated subcategory succesfully",
+        message: "updated subcategory successfully",
         success: true,
         data: data,
       });
