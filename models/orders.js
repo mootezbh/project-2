@@ -15,10 +15,12 @@ var orderSchema = new mongoose.Schema(
       type: mongoose.Types.ObjectId,
       ref: "customer",
     },
-    product : [{
-      type: mongoose.Types.ObjectId,
-      ref: "product"
-    }]
+    product: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "product",
+      },
+    ],
   },
   { timestamps: true }
 );
