@@ -3,6 +3,7 @@
     "adresse",
     "filefilter",
     "getby",
+    "neworder",
     "newproduct",
     "newsubcategory",
     "refreshtoken",

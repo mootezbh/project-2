@@ -42,7 +42,7 @@ module.exports = {
   },
   getAll: async (req, res) => {
     try {
-      const data = await customer.find();
+      const data = await customer.find().populate("orders");
       res.status(200).json({
         message: "all customers ",
         success: true,
@@ -58,7 +58,7 @@ module.exports = {
   },
   getById: async (req, res) => {
     try {
-      const data = await customer.findById(req.params.id);
+      const data = await customer.findById(req.params.id).populate("orders");
       res.status(200).json({
         message: "got customer",
         success: true,

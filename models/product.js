@@ -40,7 +40,11 @@ var productSchema = new mongoose.Schema({
     provider : {
         type: mongoose.Types.ObjectId,
         ref: "provider"
-    }
+    },
+    orders : [{
+        type: mongoose.Types.ObjectId,
+        ref: "order"
+    }]
 });
 
 //Export the model

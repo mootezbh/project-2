@@ -38,7 +38,7 @@ module.exports = {
   },
   getAll: async (req, res) => {
     try {
-      const data = await product.find().populate("gallery");
+      const data = await product.find().populate(["gallery", "orders"]);
       res.status(200).json({
         message: "all products ",
         success: true,

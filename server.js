@@ -8,6 +8,7 @@ const providerRouter = require("./routes/providerRouter");
 const customerRouter = require("./routes/customerRouter");
 const adminRouter = require("./routes/adminRouter");
 const authRouter = require("./routes/authRouter.js");
+const orderRouter = require("./routes/orderRouter");
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -22,6 +23,7 @@ app.use("/admin", adminRouter);
 app.use("/login", authRouter.login);
 app.use("/verify/:code", authRouter.verify);
 app.use("/logout", authRouter.logout);
+app.use("/order", orderRouter);
 //TODO: orders
 
 app.get("/:img", (req, res) => {

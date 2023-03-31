@@ -15,9 +15,13 @@ var orderSchema = new mongoose.Schema(
       type: mongoose.Types.ObjectId,
       ref: "customer",
     },
+    product : [{
+      type: mongoose.Types.ObjectId,
+      ref: "product"
+    }]
   },
   { timestamps: true }
 );
 
 //Export the model
-module.exports = mongoose.model("order", userSchema);
+module.exports = mongoose.model("order", orderSchema);
