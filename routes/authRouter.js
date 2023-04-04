@@ -62,7 +62,7 @@ module.exports = {
       user.verf_code = undefined;
       user.save();
       //res.sendFile(join(__dirname, "../views/success.html"));
-      res.redirect(__dirname + "../views/success.html");
+      res.sendFile(join(__dirname, "../views/success.html"));
     } catch (error) {
       res.sendFile(join(__dirname, "../views/fail.html"));
     }

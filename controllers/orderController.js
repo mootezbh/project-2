@@ -64,7 +64,6 @@ module.exports = {
   update: async (req, res) => {
     try {
       const data = await order.updateOne({ _id: req.params.id }, req.body);
-      console.log(data);
       res.status(200).json({
         message: "updated order successfully",
         success: true,
