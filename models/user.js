@@ -22,6 +22,9 @@ var userSchema = new mongoose.Schema(
     },
     verf_code: {
       type: String,
+    },
+    resetPasswordToken:{
+      type: String
     }
   },
   { timestamps: true },

@@ -17,5 +17,13 @@ var transport = nodemailer.createTransport({
             subject: `hello ${item.__t} ${item.name}`,
             html: `<a href="${URL}/verify/${item.verf_code}"> verify </a>`,
           });
+    },
+    forget: (name,email,token) => {
+      transport.sendMail({
+        from: "admin@test.com",
+        to: email,
+        subject: `hello ${name}`,
+        html: `<a href="${URL}/reset/${token}"> verify </a>`,
+      });
     }
   }
