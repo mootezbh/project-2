@@ -5,7 +5,7 @@ const { join } = require("path");
 const { forget } = require("./mailVerif");
 const URL = process.env.URL;
 let refreshtokens = [];
-const generate_token = () => {
+const generate_token = (user) => {
   token = jwt.sign(
     { id: user._id, role: user.__t },
     process.env.SECRET,
@@ -13,7 +13,7 @@ const generate_token = () => {
   );
   return token;
 }
-const generate_refToken = () => {
+const generate_refToken = (user) => {
   token = jwt.sign(
     { id: user._id },
     process.env.SECRETR,
@@ -28,8 +28,8 @@ module.exports = {
       if (user) {
         const cmp = await bcrypt.compare(req.body.password, user.password);
         if (cmp) {
-          token = generate_token();
-          let refreshtoken = generate_refToken();
+          token = generate_token(user);
+          let refreshtoken = generate_refToken(user);
           refreshtokens.push(refreshtoken);
           res.status(200).json({
             message: "auth successful",
@@ -144,6 +144,20 @@ module.exports = {
 
 
   fetchUser: async (req, res) => {
+    try {
+      const newUser = await User.findOne({});
+      res.status(200).json({
+        message: "user fetched",
+        success : true,
+        user: newUser
+      })
+    } catch (error) {
+      res.status(400).json({
+        message: "failed to get user",
+        success: false,
+      })
+    }
+
     
   }
 

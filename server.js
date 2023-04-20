@@ -15,18 +15,16 @@ const port = process.env.PORT || 5000;
 app.use(express.static('./views'))
 app.use(express.json());
 
+app.use("/", authRouter);
 app.use("/category", categoryRouter);
 app.use("/subcategory", subcategoryRouter);
 app.use("/product", productRouter);
 app.use("/provider", providerRouter);
 app.use("/customer", customerRouter);
 app.use("/admin", adminRouter);
-app.use("/login", authRouter.login);
 app.use("/verify/:code", mailVerif.verify);
-app.use("/", authRouter);
 app.use("/order", orderRouter);
-app.use("/",authRouter);
-app.use("/", authRouter);
+
 
 
 app.get("/:img", (req, res) => {
