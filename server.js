@@ -9,6 +9,7 @@ const customerRouter = require("./routes/customerRouter");
 const adminRouter = require("./routes/adminRouter");
 const authRouter = require("./routes/authRouter.js");
 const orderRouter = require("./routes/orderRouter");
+const mailVerif = require("./controllers/mailVerif.js");
 const app = express();
 const port = process.env.PORT || 5000;
 app.use(express.static('./views'))
@@ -21,7 +22,7 @@ app.use("/provider", providerRouter);
 app.use("/customer", customerRouter);
 app.use("/admin", adminRouter);
 app.use("/login", authRouter.login);
-app.use("/verify/:code", authRouter.verify);
+app.use("/verify/:code", mailVerif.verify);
 app.use("/", authRouter);
 app.use("/order", orderRouter);
 app.use("/",authRouter);
