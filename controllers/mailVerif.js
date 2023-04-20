@@ -25,5 +25,17 @@ var transport = nodemailer.createTransport({
         subject: `hello ${name}`,
         html: `<a href="${URL}/reset/${token}"> verify </a>`,
       });
-    }
+    },
+    verify: async (req, res) => {
+      try {
+        const user = await User.findOne({ verf_code: req.params.code });
+        user.verified = true;
+        user.verf_code = undefined;
+        user.save();
+        //res.sendFile(join(__dirname, "../views/success.html"));
+        res.sendFile(join(__dirname, "../views/success.html"));
+      } catch (error) {
+        res.sendFile(join(__dirname, "../views/fail.html"));
+      }
+    },
   }

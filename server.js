@@ -22,10 +22,10 @@ app.use("/customer", customerRouter);
 app.use("/admin", adminRouter);
 app.use("/login", authRouter.login);
 app.use("/verify/:code", authRouter.verify);
-app.use("/logout", authRouter.logout);
+app.use("/", authRouter);
 app.use("/order", orderRouter);
-app.use("/forgot",authRouter.forget);
-app.use("/reset/:resetPasswordToken", authRouter.resetPassword);
+app.use("/",authRouter);
+app.use("/", authRouter);
 
 
 app.get("/:img", (req, res) => {
