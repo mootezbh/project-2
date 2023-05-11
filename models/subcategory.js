@@ -1,22 +1,24 @@
-const mongoose = require('mongoose'); // Erase if already required
+const mongoose = require("mongoose"); // Erase if already required
 
 // Declare the Schema of the Mongo model
 var subCategorySchema = new mongoose.Schema({
-    name:{
-        type:String,
-        required:true,
-        unique:true,
-        index:true,
+  name: {
+    type: String,
+    required: true,
+    unique: true,
+    index: true,
+  },
+  category: {
+    type: mongoose.Types.ObjectId,
+    ref: "category",
+  },
+  product: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "product",
     },
-    category: {
-        type: mongoose.Types.ObjectId,
-        ref: "category"
-    },
-    product : [{
-        type: mongoose.Types.ObjectId,
-        ref: "product"
-    }]
+  ],
 });
 
 //Export the model
-module.exports = mongoose.model('subcategory', subCategorySchema);
+module.exports = mongoose.model("subcategory", subCategorySchema);

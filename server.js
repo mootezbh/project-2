@@ -10,10 +10,12 @@ const adminRouter = require("./routes/adminRouter");
 const authRouter = require("./routes/authRouter.js");
 const orderRouter = require("./routes/orderRouter");
 const mailVerif = require("./controllers/mailVerif.js");
+const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 5000;
-app.use(express.static('./views'))
+app.use(express.static("./views"));
 app.use(express.json());
+app.use(cors());
 
 app.use("/", authRouter);
 app.use("/category", categoryRouter);
@@ -24,8 +26,6 @@ app.use("/customer", customerRouter);
 app.use("/admin", adminRouter);
 app.use("/verify/:code", mailVerif.verify);
 app.use("/order", orderRouter);
-
-
 
 app.get("/:img", (req, res) => {
   res.sendFile(__dirname + "/uploads/" + req.params.img);

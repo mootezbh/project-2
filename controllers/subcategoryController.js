@@ -10,7 +10,7 @@ module.exports = {
         return res.status(400).json({
           message: "Error",
           success: false,
-          data: err,
+          error: err.message,
         });
       } else {
         res.status(200).json({
@@ -25,7 +25,10 @@ module.exports = {
   },
   getAll: async (req, res) => {
     try {
-      const data = await subcategory.find().populate("product");
+      const data = await subcategory
+        .find()
+        .populate("product")
+        .populate("category");
       res.status(200).json({
         message: "all subcategories",
         success: true,

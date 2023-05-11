@@ -7,9 +7,9 @@ const URL = process.env.URL;
 let refreshtokens = [];
 const generate_token = (user) => {
   token = jwt.sign(
-    { id: user._id, role: user.__t },
+    { id: user._id },
     process.env.SECRET,
-    { expiresIn: "50s" }
+    { expiresIn: "1m" }
   );
   return token;
 }
