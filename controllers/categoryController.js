@@ -6,7 +6,7 @@ module.exports = {
     newCategory.save(req.body, (err, data) => {
       if (err) {
         return res.status(400).json({
-          message: "Error",
+          message: "category already exist",
           success: false,
           data: err,
         });
@@ -37,7 +37,7 @@ module.exports = {
   },
   getById: async (req, res) => {
     try {
-      const data = await category.findById(req.params.id);
+      const data = await category.findById(req.params.id).populate('subcategory');
       res.status(200).json({
         message: "got category",
         success: true,

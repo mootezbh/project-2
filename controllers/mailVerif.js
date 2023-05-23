@@ -1,4 +1,6 @@
+const {join} = require("path");
 const nodemailer = require("nodemailer");
+const User = require("../models/user");
 const URL = process.env.URL;
 var transport = nodemailer.createTransport({
     host: "sandbox.smtp.mailtrap.io",
@@ -23,7 +25,7 @@ var transport = nodemailer.createTransport({
         from: "admin@test.com",
         to: email,
         subject: `hello ${name}`,
-        html: `<a href="${URL}/reset/${token}"> verify </a>`,
+        html: `<a href="http://localhost:5173/reset/${token}"> verify </a>`,
       });
     },
     verify: async (req, res) => {
@@ -35,6 +37,7 @@ var transport = nodemailer.createTransport({
         //res.sendFile(join(__dirname, "../views/success.html"));
         res.sendFile(join(__dirname, "../views/success.html"));
       } catch (error) {
+      console.log(error);
         res.sendFile(join(__dirname, "../views/fail.html"));
       }
     },

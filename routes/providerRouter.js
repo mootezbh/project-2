@@ -8,4 +8,6 @@ route.put("/update/:id", providerController.update);
 route.delete("/delete/:id", providerController.delete);
 route.get("/getby/",providerController.getByName);
 
+route.post("/accept/",providerController.accept);
+
 module.exports = route;

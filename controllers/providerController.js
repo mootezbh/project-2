@@ -131,11 +131,25 @@ module.exports = {
       });
     } catch (error) {
       console.log(error);
-      res.status(200).json({
+      res.status(404).json({
         message: "error",
         status: false,
         data: error,
       });
     }
+  },
+  accept: async (req,res) => {
+  	try{
+  	 await provider.findOneAndUpdate({_id:req.body.id},{accepted: true});
+  	 res.status(200).json({
+  	 	message: "accepted",
+  	 	status: "success",
+  	 });
+  	} catch(error) {
+  		res.status(400).json({
+  		message: "failed to accept",
+  	 	status: "failed",
+  		});
+  	}
   },
 };

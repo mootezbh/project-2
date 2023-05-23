@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { join } = require("path");
 const { forget } = require("./mailVerif");
+const crypto = require('crypto');
 const URL = process.env.URL;
 let refreshtokens = [];
 const generate_token = (user) => {
@@ -31,11 +32,13 @@ module.exports = {
           token = generate_token(user);
           let refreshtoken = generate_refToken(user);
           refreshtokens.push(refreshtoken);
+          const u = await User.findOne({ email: req.body.email }).select("-password");
           res.status(200).json({
             message: "auth successful",
             success: true,
             token: token,
             refresh_token: refreshtoken,
+            data: u,
           });
         } else {
           res.status(404).json({
@@ -72,10 +75,11 @@ module.exports = {
         const token = jwt.sign({ _id: user._id }, process.env.SECRET, {
           expiresIn: "1m",
         });
-        user.resetPasswordToken = token;
+        var rand = await crypto.randomBytes(64).toString('hex');
+        user.resetPasswordToken = rand;
         user.save();
         
-        forget(user.name, user.email, token);
+        forget(user.name, user.email, rand);
         res.status(200).json({
           message: "reset password",
           success: "true",
@@ -99,12 +103,12 @@ module.exports = {
     try {
       const token = req.params.token;
       if (token) {
-        const verified = jwt.verify(token, process.env.SECRET, async (err) => {
+        /*const verified = jwt.verify(token, process.env.SECRET, async (err) => {
           if (err) {
             res.status(400).json({
               message: "error token",
             });
-          }
+          }*/
           const user = await User.findOne({ resetPasswordToken: token });
           user.password = bcrypt.hashSync(req.body.password, 10);
           user.resetPasswordToken = undefined;
@@ -112,7 +116,7 @@ module.exports = {
           res.status(200).json({
             message: "password changed",
           });
-        });
+        //});
       }
     } catch (error) {
       res.status(400).json({

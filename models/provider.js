@@ -4,6 +4,10 @@ const providerSchema = new mongoose.Schema({
   company_name: {
     type: String,
   },
+  accepted: {
+    type: Boolean,
+    default: false,
+  },
   product: [{
     type: mongoose.Types.ObjectId,
     ref: "product"
