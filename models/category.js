@@ -11,6 +11,9 @@ var categorySchema = new mongoose.Schema({
         type:String,
         required:true,
     },
+    img:{
+    	type:String,
+    },
     subcategory: [{
         type: mongoose.Types.ObjectId,
         ref: "subcategory"

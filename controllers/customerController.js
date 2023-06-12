@@ -8,7 +8,7 @@ const URL = process.env.URL;
 module.exports = {
   add: async (req, res) => {
     try {
-      req.body.picture = req.file.path;
+      req.body["picture"] = !req.file ? null : req.file.filename
       const hashedPwd = await bcrypt.hashSync(req.body.password, 10);
       const data = new customer({
         ...req.body,
@@ -75,6 +75,7 @@ module.exports = {
 
   update: async (req, res) => {
     try {
+    console.log(req.body.picture);
       const data = await customer.updateOne({ _id: req.params.id }, req.body);
       console.log(data);
       res.status(200).json({

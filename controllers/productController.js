@@ -54,7 +54,7 @@ module.exports = {
   },
   getById: async (req, res) => {
     try {
-      const data = await product.findById(req.params.id);
+      const data = await product.findById(req.params.id).populate("orders");
       res.status(200).json({
         message: "got product",
         success: true,

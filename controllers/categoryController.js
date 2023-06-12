@@ -2,6 +2,7 @@ const category = require("../models/category");
 
 module.exports = {
   addCategory: async (req, res) => {
+  req.body["img"] = !req.file ? null : req.file.filename
     const newCategory = new category(req.body);
     newCategory.save(req.body, (err, data) => {
       if (err) {

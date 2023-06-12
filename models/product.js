@@ -41,10 +41,10 @@ var productSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: "provider"
     },
-    orders : [{
+    orders : {
         type: mongoose.Types.ObjectId,
         ref: "order"
-    }]
+    }
 });
 
 //Export the model

@@ -3,11 +3,11 @@ const mongoose = require("mongoose"); // Erase if already required
 // Declare the Schema of the Mongo model
 var orderSchema = new mongoose.Schema(
   {
-    quantity: {
+    quantity_total: {
       type: String,
       required: true,
     },
-    price: {
+    price_total: {
       type: String,
       required: true,
     },
@@ -15,10 +15,19 @@ var orderSchema = new mongoose.Schema(
       type: mongoose.Types.ObjectId,
       ref: "customer",
     },
-    product: [
+    products: [
       {
-        type: mongoose.Types.ObjectId,
-        ref: "product",
+        product: {
+          type: mongoose.Types.ObjectId,
+     	  ref: "customer",
+        },
+        price: {
+          type: String,
+        },
+        quantity: {
+          type: String,
+          default: 0,
+        }
       },
     ],
   },
